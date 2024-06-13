@@ -1,18 +1,29 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
+import { useEffect, useState } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit() {
     const blockProps = useBlockProps();
+    const [content, setContent] = useState('');
+
+    useEffect(() => {
+        // Fetch the server-side rendered content with the context parameter set to 'edit'
+        wp.apiFetch({ path: '/wp/v2/block-renderer/ldsd/course-list?context=edit' }).then((response) => {
+            console.log('API fetch response:', response); // Add logging here
+            setContent(response.rendered);
+        }).catch((error) => {
+            console.error('Error fetching server-side rendered content:', error);
+        });
+    }, []);
 
     return (
         <div { ...blockProps }>
-            <h2>{ __( 'Course List', 'ldsd' ) }</h2>
-            <ul>
-                <li>{ __( 'Course 1', 'ldsd' ) }</li>
-                <li>{ __( 'Course 2', 'ldsd' ) }</li>
-                <li>{ __( 'Course 3', 'ldsd' ) }</li>
-            </ul>
+            { content ? (
+                <div dangerouslySetInnerHTML={{ __html: content }} />
+            ) : (
+                <p>{ __( 'Loading...', 'ldsd' ) }</p>
+            )}
         </div>
     );
 }
