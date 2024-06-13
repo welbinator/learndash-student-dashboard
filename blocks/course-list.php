@@ -18,7 +18,7 @@ function register_block() {
         'attributes'      => array(
             'blockTitle' => array(
                 'type'    => 'string',
-                'default' => 'Course List',
+                'default' => 'Courses you are enrolled in',
             ),
         ),
         'editor_script'   => 'ldsd-course-list-editor-script',
@@ -136,10 +136,10 @@ function block_render( $attributes ) {
                                 </a>
                             </h3>
                             <div class="progress-bar-container">
-                            <div class="progress-bar">
-                                <div class="progress-bar__inner" style="width: <?php echo esc_html( $progress_percentage ); ?>%;"></div>
-                            </div>
-                            <p class="progress-bar__percentage"><?php echo esc_html( $progress_percentage ); ?>%</p>
+                                <div class="progress-bar">
+                                    <div class="progress-bar__inner" style="width: <?php echo esc_html( $progress_percentage ); ?>%;"></div>
+                                </div>
+                                <p class="progress-bar__percentage"><?php echo esc_html( $progress_percentage ); ?>%</p>
                             </div>
                             <p class="course-card__enrollment-date">Date enrolled: <?php echo esc_html( $enrollment_date ); ?></p>
                         </div>

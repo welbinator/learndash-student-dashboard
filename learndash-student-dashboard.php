@@ -26,8 +26,9 @@ require_once LDSD_PLUGIN_DIR . 'includes/functions.php';
 require_once LDSD_PLUGIN_DIR . 'includes/class-ldsd-dashboard.php';
 require_once LDSD_PLUGIN_DIR . 'includes/class-ldsd-shortcodes.php';
 require_once LDSD_PLUGIN_DIR . 'includes/class-ldsd-ajax.php';
-require_once plugin_dir_path( __FILE__ ) . 'blocks/blocks.php';
 require_once plugin_dir_path( __FILE__ ) . 'blocks/course-list.php';
+require_once plugin_dir_path( __FILE__ ) . 'blocks/certificates.php';
+require_once plugin_dir_path( __FILE__ ) . 'blocks/blocks.php';
 
 // Load plugin text domain
 function ldsd_load_textdomain() {
