@@ -5,8 +5,73 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-ldsd-course-list {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+ .course-list-block {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.course-card__header {
+    position: relative;
+}
+
+.course-card__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.course-card__content {
+    padding: 10px;
+}
+
+.course-card__title {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.course-card__progress {
+    margin: 10px 0;
+}
+
+.course-card__enrollment-date {
+    margin: 10px 0;
+}
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+}
+.progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress-bar__inner {
+    height: 20px;
+    background-color: #4caf50;
+    width: 0; /* This will be dynamically set */
+    transition: width 0.4s ease;
+}
+
+.progress-bar__percentage {
+    min-width: 40px;
+    font-size: 14px;
+    margin-top: -25px;
+    margin: 5px;
+    font-weight: bold;
+    color: #4caf50;
 }

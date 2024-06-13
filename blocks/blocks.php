@@ -24,6 +24,12 @@ function enqueue_block_editor_assets() {
                 filemtime( plugin_dir_path( __FILE__ ) . '../build/course-list/index.js' ),
                 true
             );
+
+            $courses = \LearnDashLMS\StudentDashboard\Blocks\CourseList\get_enrolled_courses();
+
+            wp_localize_script( 'ldsd-course-list-block', 'ldsdCourseListData', array(
+                'courses' => $courses
+            ));
         }
     }
 }
