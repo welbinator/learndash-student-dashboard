@@ -15,7 +15,13 @@ namespace LearnDashLMS\StudentDashboard\Blocks\CourseList;
  */
 function register_block() {
     register_block_type('ldsd/course-list', array(
-        'editor_script' => 'ldsd-course-list-editor-script',
+        'attributes'      => array(
+            'blockTitle' => array(
+                'type'    => 'string',
+                'default' => 'Course List',
+            ),
+        ),
+        'editor_script'   => 'ldsd-course-list-editor-script',
         'render_callback' => __NAMESPACE__ . '\block_render',
     ));
 
@@ -79,6 +85,7 @@ function get_enrolled_courses() {
  * @return string The HTML content to display.
  */
 function block_render( $attributes ) {
+    $blockTitle = isset($attributes['blockTitle']) ? $attributes['blockTitle'] : 'Course List';
     $courses = get_enrolled_courses();
 
     // Log the courses data
@@ -87,7 +94,7 @@ function block_render( $attributes ) {
     ob_start();
     ?>
     <div class="course-list-block">
-        <h2>Course List</h2>
+        <h2><?php echo esc_html( $blockTitle ); ?></h2>
         <?php if ( ! empty( $courses ) ) : ?>
             <ul>
                 <?php foreach ( $courses as $course ) : ?>

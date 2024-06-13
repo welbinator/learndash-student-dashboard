@@ -1,9 +1,10 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, TextControl } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import './editor.scss';
 
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
     const blockProps = useBlockProps();
     const [content, setContent] = useState('');
 
@@ -19,6 +20,15 @@ export default function Edit() {
 
     return (
         <div { ...blockProps }>
+            <InspectorControls>
+                <PanelBody title={ __('Block Settings', 'ldsd') }>
+                    <TextControl
+                        label={ __('Block Title', 'ldsd') }
+                        value={ attributes.blockTitle }
+                        onChange={(value) => setAttributes({ blockTitle: value })}
+                    />
+                </PanelBody>
+            </InspectorControls>
             { content ? (
                 <div dangerouslySetInnerHTML={{ __html: content }} />
             ) : (
