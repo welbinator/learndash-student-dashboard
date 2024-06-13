@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ldsd/certificates",
+	"version": "0.1.0",
+	"title": "Student Dashboard Certificates",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "List of certificates the student has earned",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "certificates",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}
