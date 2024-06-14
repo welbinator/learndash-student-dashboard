@@ -5,7 +5,14 @@
  * Replace them with your own styles or remove the file completely.
  */
 
- .course-list-block {
+ /**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.course-list-block {
     margin: 0 auto;
     max-width: 1200px;
 }
@@ -20,34 +27,86 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-card__header {
     position: relative;
+    height: 150px;
+    background: lightgrey;
 }
 
 .course-card__image {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
-}
+    position: absolute;
 
-.course-card__content {
-    padding: 10px;
 }
 
 .course-card__title {
     font-size: 1.2em;
-    margin: 10px 0;
+    margin: 0!important;
+    
+}
+
+.course-card__content {
+    padding: 20px;
+   
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.course-card__footer {
+    height: 75px;
+    position: relative;
+    display: flex;
+    padding: 20px;
+
+    div {
+    width: 50%;
+    margin: auto;
+
+    p {
+        text-align: center;
+    }
+}
+}
+
+.course-card__footer .dashicons {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+// .course-card__footer > div:first-child {
+//    padding-right: 10px;
+// }
+// .course-card__footer > div:last-child {
+//     padding-left: 10px;
+// }
+.course-card__footer::before {
+    content:'';
+    height: 1px;
+    width: 90%;
+    background: #c4c4c4;
+    position: absolute;
+    top: 0;
+    left: 5%;
 }
 
 .course-card__progress {
     margin: 10px 0;
 }
 
-.course-card__enrollment-date {
+.course-card__enrollment-date,
+.course-card__lessons {
     margin: 10px 0;
+    font-size: .6em;
 }
+
 .progress-bar-container {
     display: flex;
     align-items: center;

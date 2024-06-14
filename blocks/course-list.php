@@ -96,6 +96,28 @@ function extract_progress_percentage( $progress_html ) {
 }
 
 /**
+ * Fetches the number of lessons for a specific course.
+ *
+ * @param int $course_id The course ID.
+ * @return int The number of lessons.
+ */
+function get_number_of_lessons( $course_id ) {
+    $lessons_query = new \WP_Query( array(
+        'post_type'      => 'sfwd-lessons',
+        'posts_per_page' => -1,
+        'post_status'    => 'publish',
+        'meta_query'     => array(
+            array(
+                'key'   => 'course_id',
+                'value' => $course_id,
+            ),
+        ),
+    ));
+
+    return $lessons_query->found_posts;
+}
+
+/**
  * Renders the 'Course List' block.
  *
  * Outputs the HTML for the 'Course List' block.
@@ -122,26 +144,33 @@ function block_render( $attributes ) {
                      $progress_html = learndash_course_progress( array( 'user_id' => $user_id, 'course_id' => $course_id ) );
                      $progress_percentage = extract_progress_percentage( $progress_html );
                      $enrollment_date = get_enrollment_date( $user_id, $course_id );
+                     $number_of_lessons = get_number_of_lessons( $course_id );
                     ?>
                     <div class="course-card">
                         <div class="course-card__header">
                             <?php if ( $course_image ) : ?>
                                 <a href="<?php echo esc_url( $course_url ); ?>"><img src="<?php echo esc_url( $course_image ); ?>" class="course-card__image" alt="<?php echo esc_attr( $course_title ); ?>"></a>
                             <?php endif; ?>
+                            
                         </div>
                         <div class="course-card__content">
-                            <h3 class="course-card__title">
-                                <a href="<?php echo esc_url( $course_url ); ?>">
-                                    <?php echo esc_html( $course_title ); ?>
-                                </a>
-                            </h3>
+                            
                             <div class="progress-bar-container">
                                 <div class="progress-bar">
                                     <div class="progress-bar__inner" style="width: <?php echo esc_html( $progress_percentage ); ?>%;"></div>
                                 </div>
                                 <p class="progress-bar__percentage"><?php echo esc_html( $progress_percentage ); ?>%</p>
                             </div>
-                            <p class="course-card__enrollment-date">Date enrolled: <?php echo esc_html( $enrollment_date ); ?></p>
+                            <h3 class="course-card__title">
+                                <a href="<?php echo esc_url( $course_url ); ?>">
+                                    <?php echo esc_html( $course_title ); ?>
+                                </a>
+                            </h3>
+                            
+                        </div>
+                        <div class="course-card__footer">
+                            <div><p class="course-card__enrollment-date"><span class="dashicons dashicons-calendar-alt"></span> <?php echo esc_html( $enrollment_date ); ?></p></div>
+                            <div><p class="course-card__lessons"><span class="dashicons dashicons-text-page"></span><?php echo esc_html( $number_of_lessons ); ?> Lessons</p></div>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -153,7 +182,3 @@ function block_render( $attributes ) {
     <?php
     return ob_get_clean();
 }
-
-
-
-
